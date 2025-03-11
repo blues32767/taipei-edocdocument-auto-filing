@@ -17,10 +17,7 @@
 
 ### 方法：開發者模式安裝
 
-1. 下載此儲存庫的 ZIP 檔案
-   ```
-   git clone https://github.com/您的用戶名/document-auto-filing-assistant.git
-   ```
+1. 下載此儲存庫的 ZIP 檔案【待測試後更新】
 
 2. 開啟 Chrome 瀏覽器，在網址列輸入 `chrome://extensions/`
 
