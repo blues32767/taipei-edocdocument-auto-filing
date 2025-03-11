@@ -1,4 +1,4 @@
-# 公文自動存查助手 (Document Auto-Filing Assistant)
+# 臺北市政府公文自動存查助手 (taipei-edoc-Document Auto-Filing Assistant)
 
 ![版本](https://img.shields.io/badge/版本-1.0-blue)
 ![授權](https://img.shields.io/badge/授權-MIT-green)
