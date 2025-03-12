@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "公文自動存查-(手動擴充套件輸入版)",
+  "version": "1.0",
+  "description": "臺北市公文自動存查，擴充套件輸入檔號、案次號順序(1、2...)，適用待結案公文處理頁面，僅限同一種檔號，不會自動分類",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://edoc.gov.taipei/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

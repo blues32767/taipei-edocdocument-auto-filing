@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>公文自動存查助手</title>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background-color: #f8f9fa;
+            width: 300px;
+            height: auto;
+            padding: 15px;
+        }
+        .toggle-container {
+            text-align: center;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        .settings-container {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .setting-group {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            box-sizing: border-box;
+        }
+        #autoToggle {
+            background-color: #4a76a8;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            outline: none;
+            width: 100%;
+        }
+        #autoToggle:hover {
+            background-color: #3a5f8a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        #autoToggle:active {
+            transform: translateY(0);
+        }
+        #autoToggle.active {
+            background-color: #4caf50;
+        }
+        .status-indicator {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+        .app-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .features {
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            margin-top: 10px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+            width: 100%;
+        }
+        .save-settings {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 5px;
+        }
+        .save-settings:hover {
+            background-color: #3d9140;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-title">公文自動存查助手</div>
+    
+    <div class="settings-container">
+        <div class="setting-group">
+            <label for="fileNumber">檔號：</label>
+            <input type="text" id="fileNumber" placeholder="例如: 03010101">
+        </div>
+        <div class="setting-group">
+            <label for="caseNumber">案次號：</label>
+            <input type="text" id="caseNumber" placeholder="例如: 1">
+        </div>
+        <button class="save-settings" id="saveSettings">儲存設定</button>
+    </div>
+    
+    <div class="toggle-container">
+        <button id="autoToggle">切換自動存查功能</button>
+        <div class="status-indicator" id="statusIndicator"></div>
+    </div>
+    
+    <div class="features">
+        支援功能：自動存查<br>
+        <small>啟用後10分鐘自動關閉</small>
+        <footer><small>開發者 Developer ：blues32767|20250311</a><br></small> </footer>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
