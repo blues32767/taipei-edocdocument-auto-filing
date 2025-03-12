@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -27,12 +28,84 @@
         .download-link a:hover {
             text-decoration: underline;
         }
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
-    <h1>安裝公文自動存查助手</h1>
-    <div class="download-link">
-        <a href="releases/download/taipei-edocdocument-auto-filing/taipei-edocdocument-auto-filing.crx" download="https://github.com/blues32767/taipei-edocdocument-auto-filing/releases/download/taipei-edocdocument-auto-filing/taipei-edocdocument-auto-filing.crx">點擊此處下載並安裝擴充套件</a>
+    <div class="content">
+        <h1>臺北市政府公文自動存查助手 (taipei-edoc-Document Auto-Filing Assistant)</h1>
+        <p>
+            <img src="https://img.shields.io/badge/版本-1.0-blue" alt="版本">
+            <img src="https://img.shields.io/badge/授權-MIT-green" alt="授權">
+        </p>
+        <p>公文自動存查助手是一個 Chrome 擴充功能，專為臺北市政府公文系統設計，可自動化執行公文存查作業，提升公文處理效率。</p>
+        <h2>安裝方式</h2>
+        <ol>
+            <li><strong>下載並解壓縮擴充套件</strong>：
+                <p>請點擊這個連結下載壓縮檔案：<a href="https://github.com/blues32767/taipei-edocdocument-auto-filing/releases/download/taipei-edocdocument-auto-filing/taipei-edocdocument-auto-filing.zip">下載擴充套件</a>，將下載的壓縮檔案解壓縮到您電腦上的某個資料夾中。</p>
+            </li>
+            <li><strong>開啟 Chrome 瀏覽器</strong>：
+                <p>打開您的 Chrome 瀏覽器。</p>
+            </li>
+            <li><strong>進入「擴充功能」頁面</strong>：
+                <p>在瀏覽器右上角，點擊三個點的選單圖示，從選單中選擇「擴充功能」=>「管理擴充功能」。這會打開一個新的標籤頁，顯示所有已安裝的擴充功能。</p>
+            </li>
+            <li><strong>開啟開發人員模式</strong>：
+                <p>在「擴充功能」頁面的右上角，您會看到一個藍色的滑動開關，標示著「開發人員模式」。請將這個開關滑動至開啟狀態，開啟開發人員模式。</p>
+            </li>
+            <li><strong>載入擴充套件</strong>：
+                <p>開啟開發人員模式後，會出現幾個新的選項按鈕，其中一個是「載入未封裝項目」。點擊這個按鈕，選擇您剛剛解壓縮的擴充套件資料夾，點擊「選取資料夾」。</p>
+            </li>
+            <li><strong>完成安裝</strong>：
+                <p>選擇好資料夾後，Chrome 會自動載入這個擴充套件。安裝完成後，請查看瀏覽器右上角的擴充功能圖示列，您應該能看到一個新的圖示，表示「公文自動存查助手」已成功安裝。</p>
+            </li>
+            <li><strong>設定檔號案號</strong>：
+                <p>點選擴充套件圖示，可設定檔號、案件號。</p>
+            </li>
+        </ol>
+        <h3>注意事項</h3>
+        <ul>
+            <li>請僅在[待結案]頁面啟用，存查清空後，自動存查功能會自動關閉。</li>
+            <li>[待結案]頁面請清空到只剩下同一類存查[檔號]的公文，此套件不會自動分類公文。</li>
+            <li>[紙本文]會需要填寫數量，所以卡住的時候，就去紙本文數量那裏填寫數字，又會繼續跑了。</li>
+            <li>如果需要修改預設的檔號，請用記事本修改<code>content.js</code>檔案的<code>fileNumber(檔號)</code>、<code>caseNumber(案次號)</code>。</li>
+        </ul>
+        <h2>主要功能</h2>
+        <ul>
+            <li><strong>自動存查</strong>：一鍵自動勾選待處理公文並執行存查操作</li>
+            <li><strong>自動存檔</strong>：自動填寫檔號與案次號，完成公文存檔流程</li>
+            <li><strong>可自訂檔號與案次號</strong>：透過擴充套件按鈕設定，無需修改程式碼</li>
+            <li><strong>安全機制</strong>：10分鐘後自動關閉功能，避免長時間運行產生問題</li>
+            <li><strong>狀態顯示</strong>：頁面右上角顯示目前自動化功能狀態</li>
+            <li><strong>通知提醒</strong>：功能自動關閉時會顯示通知</li>
+        </ul>
+        <h2>使用方法</h2>
+        <ol>
+            <li>登入公文系統，進入待處理公文頁面</li>
+            <li>點擊"擴充功能"圖示，開啟設定面板</li>
+            <li>輸入所需的<strong>檔號</strong>與<strong>案次號</strong>，點擊「儲存設定」</li>
+            <li>點擊「開啟自動存查功能」按鈕開始自動化處理</li>
+            <li>系統將依序自動勾選未處理公文並執行存查操作</li>
+            <li>在存檔頁面，系統將自動填入設定的檔號與案次號並提交</li>
+        </ol>
+        <h2>自訂設定</h2>
+        <p>擴充套件提供以下自訂選項：</p>
+        <ul>
+            <li><strong>檔號</strong>：公文歸檔的檔號，例如「03010101」(綜合業務-3年)</li>
+            <li><strong>案次號</strong>：公文歸檔的案次號，例如「1」(綜合業務-3)</li>
+            <li><strong>自動關閉時間</strong>：預設 10 分鐘後自動關閉功能</li>
+        </ul>
+        <div class="download-link">
+            <a href="releases/download/taipei-edocdocument-auto-filing/taipei-edocdocument-auto-filing.crx" download="https://github.com/blues32767/taipei-edocdocument-auto-filing/releases/download/taipei-edocdocument-auto-filing/taipei-edocdocument-auto-filing.crx">點擊此處下載並安裝擴充套件</a>
+        </div>
     </div>
 </body>
 </html>
+```
