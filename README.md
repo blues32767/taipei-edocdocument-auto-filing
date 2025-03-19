@@ -11,7 +11,7 @@
 ## 安裝方式
 
 1. **下載並解壓縮擴充套件**：
-   - 請點擊這個連結下載壓縮檔案：[下載擴充套件](https://github.com/blues32767/taipei-edocdocument-auto-filing/releases/download/taipei-edocdocument-auto-filing/taipei-edocdocument-auto-filing.zip)
+   - 請點擊這個連結下載壓縮檔案：[下載擴充套件](https://github.com/blues32767/taipei-edocdocument-auto-filing/releases/download/taipei-edocdocument-auto-filing/taipei-edocdocument-auto-filing-0319v5-.zip)
    - 將下載的壓縮檔案解壓縮到您電腦上的某個資料夾中。
 
 2. **開啟 Chrome 瀏覽器**：
