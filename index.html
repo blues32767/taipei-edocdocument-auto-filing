@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -220,7 +219,11 @@
         
         .download-section {
             text-align: center;
-            margin: 3rem 0 1rem;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background-color: #e8f5e9;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
         
         .download-button {
@@ -233,6 +236,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+            font-size: 1.1rem;
         }
         
         .download-button:hover {
@@ -247,6 +251,24 @@
             background-color: var(--dark-bg);
             color: white;
             margin-top: 3rem;
+        }
+        
+        .intro-section {
+            margin-bottom: 2rem;
+        }
+        
+        .intro-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
         }
         
         @media (max-width: 768px) {
@@ -265,6 +287,11 @@
             h2 {
                 font-size: 1.5rem;
             }
+            
+            .download-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -282,40 +309,26 @@
     
     <div class="container">
         <div class="content">
-            <p class="intro">公文自動存查助手是一個 Chrome 擴充功能，專為臺北市政府公文系統設計，可自動化執行待結案公文同一檔號之存查作業，提升公文處理效率。</p>
-            <p class="intro">尚未支援"解除列管"功能，待之後更新。</p>
-            <p class="intro">預設存查【檔號:03010101、案號:1】，如需修正，請修改content.js。</p>
-            <h2>主要功能</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-title">自動存查</div>
-                    <p>一鍵自動勾選待處理公文並執行存查操作</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-title">自動存檔</div>
-                    <p>自動填寫檔號與案次號，完成公文存檔流程</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-title">可自訂檔號與案次號</div>
-                    <p>透過擴充套件按鈕設定，無需修改程式碼</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-title">安全機制</div>
-                    <p>10分鐘後自動關閉功能，避免長時間運行產生問題</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-title">狀態顯示</div>
-                    <p>頁面右上角顯示目前自動化功能狀態</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-title">通知提醒</div>
-                    <p>功能自動關閉時會顯示通知</p>
-                </div>
-            </div>
-                        <div class="download-section">
+            <!-- 下載按鈕移至最上方 -->
+            <div class="download-section">
+                <h2 style="margin-top: 0; border-bottom: none; color: var(--accent-color);">立即下載</h2>
+                <p style="margin-bottom: 1.5rem;">快速提升公文處理效率，一鍵自動化存查作業</p>
                 <a href="https://github.com/blues32767/taipei-edocdocument-auto-filing/releases/download/taipei-edocdocument-auto-filing/taipei-edocdocument-auto-filing-0320-v3.zip" class="download-button">下載擴充套件</a>
             </div>
             
+            <!-- 簡介部分 -->
+            <div class="intro-section">
+                <p class="intro-text">公文自動存查助手是一個 Chrome 擴充功能，專為臺北市政府公文系統設計，可自動化執行待結案公文同一檔號之存查作業，提升公文處理效率。</p>
+                <div class="highlight-box">
+                    <p><strong>重要提示：</strong></p>
+                    <ul style="margin-bottom: 0;">
+                        <li>尚未支援"解除列管"功能，待之後更新。</li>
+                        <li>預設存查【檔號:03010101、案號:1】，可透過擴充套件設定修改。</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 安裝方式 -->
             <h2>安裝方式</h2>
             <div class="step-container">
                 <div class="step">
@@ -369,16 +382,18 @@
                 </div>
             </div>
             
+            <!-- 注意事項 -->
             <div class="note-box">
                 <div class="note-title">注意事項</div>
                 <ul>
                     <li>請僅在[待結案]頁面啟用：此擴充套件僅在[待結案]頁面執行自動存查功能。當您完成存查後，擴充套件會自動關閉以避免干擾其他操作。</li>
                     <li>清空非存查公文：在[待結案]頁面，請清空到只剩下同一類存查[檔號]的公文。此套件不會自動分類公文，請自行確認公文的分類。</li>
                     <li>紙本文數量：遇到需要填寫紙本文數量的公文時，如果擴充套件卡住，請手動填寫數量後，擴充套件會繼續執行。</li>
-                    <li>修改預設檔號和案次號：如果需要修改預設的檔號或案次號，請用記事本打開 content.js 檔案，並修改 fileNumber（檔號）和 caseNumber（案次號）變數的值</code>。</li>
+                    <li>修改預設檔號和案次號：如果需要修改預設的檔號或案次號，請用記事本打開 content.js 檔案，並修改 fileNumber（檔號）和 caseNumber（案次號）變數的值。</li>
                 </ul>
             </div>
             
+            <!-- 使用方法 -->
             <h2>使用方法</h2>
             <ol>
                 <li>登入公文系統，進入待處理公文頁面</li>
@@ -389,6 +404,36 @@
                 <li>在存檔頁面，系統將自動填入設定的檔號與案次號並提交</li>
             </ol>
             
+            <!-- 主要功能 -->
+            <h2>主要功能</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-title">自動存查</div>
+                    <p>一鍵自動勾選待處理公文並執行存查操作</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">自動存檔</div>
+                    <p>自動填寫檔號與案次號，完成公文存檔流程</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">可自訂檔號與案次號</div>
+                    <p>透過擴充套件按鈕設定，無需修改程式碼</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">安全機制</div>
+                    <p>10分鐘後自動關閉功能，避免長時間運行產生問題</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">狀態顯示</div>
+                    <p>頁面右上角顯示目前自動化功能狀態</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">通知提醒</div>
+                    <p>功能自動關閉時會顯示通知</p>
+                </div>
+            </div>
+            
+            <!-- 自訂設定 -->
             <h2>自訂設定</h2>
             <p>擴充套件提供以下自訂選項：</p>
             <ul>
@@ -396,8 +441,6 @@
                 <li><strong>案次號</strong>：公文歸檔的案次號，例如「1」(綜合業務-3)</li>
                 <li><strong>自動關閉時間</strong>：預設 10 分鐘後自動關閉功能</li>
             </ul>
-            
-
         </div>
     </div>
     
