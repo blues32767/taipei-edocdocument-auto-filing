@@ -98,6 +98,15 @@
 ### v4.0
 - 2026/8/19【新增'附件歸檔'自動開啟與關閉。】
 
+### Privacy Policy for 臺北市公文自動存查助手
+This Chrome extension ("臺北市公文自動存查助手") is designed as a productivity tool for the Taipei City Government official document system.
+
+Data Collection: We do not collect, store, or transmit any personal information, user credentials, or browsing history.
+
+Local Storage: User preferences such as "File Number" and "Case Number" are stored strictly on the user's local device using chrome.storage.local and are never shared with anyone.
+
+Contact: If you have any questions, please contact the developer via GitHub.
+
 ## 授權資訊
 
 此專案採用 MIT 授權條款。
