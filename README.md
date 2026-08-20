@@ -10,7 +10,7 @@
 以下是修改後的安裝步驟，讓一般使用者更容易理解和操作：
 
 ## 安裝方式
-
+2026/8/19 已針對公文系統"附件歸檔"進行更新。
 1. **下載並解壓縮擴充套件**：
    - 請點擊這個連結下載壓縮檔案：[下載擴充套件](https://github.com/blues32767/taipei-edocdocument-auto-filing/releases/download/taipei-edocdocument-auto-filing/taipei-edocdocument-auto-filing-20260819.zip)
    - 將下載的壓縮檔案解壓縮到您電腦上的某個資料夾中。
