@@ -6,6 +6,8 @@
 公文自動存查助手是一個 Chrome 擴充功能，專為臺北市政府公文系統設計，可自動化執行公文存查作業，提升公文處理效率。
 # 公文自動存查助手
 
+##　目前該專案以上架到Chrome線上應用程式商店：
+- [Chrome應用程式商店連結](https://chromewebstore.google.com/detail/oiiaicbnnhogpfihckgkdnmbmclhalmg?utm_source=item-share-cb)
 
 以下是修改後的安裝步驟，讓一般使用者更容易理解和操作：
 
