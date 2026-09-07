@@ -7,9 +7,10 @@
 # 2026/8/19 已針對公文系統"附件歸檔"進行更新。
 
 # 公文自動存查助手
-##　目前該專案以上架到Chrome線上應用程式商店：
+##　目前該專案以上架到線上應用程式商店：
 - [Chrome應用程式商店連結](https://chromewebstore.google.com/detail/oiiaicbnnhogpfihckgkdnmbmclhalmg?utm_source=item-share-cb)
 
+- [Edge外掛程式](https://microsoftedge.microsoft.com/addons/detail/%E8%87%BA%E5%8C%97%E5%B8%82%E5%85%AC%E6%96%87%E8%87%AA%E5%8B%95%E5%AD%98%E6%9F%A5%E5%8A%A9%E6%89%8B/ockcmfmilhfkkmleicdkegbjnpjjbnid)
 
 ### 主要功能
 
