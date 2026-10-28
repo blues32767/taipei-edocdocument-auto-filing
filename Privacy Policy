@@ -1,8 +1,43 @@
-Privacy Policy for 臺北市公文自動存查助手
-This Chrome extension ("臺北市公文自動存查助手") is designed as a productivity tool for the Taipei City Government official document system.
+**Privacy Policy｜臺北市公文助手（非官方）**
+Last updated: 2026-10-28 (version 2026.10.28.1305)
 
-Data Collection: We do not collect, store, or transmit any personal information, user credentials, or browsing history.
+**1. Overview (概述)**
+This Chrome extension ("臺北市公文助手") is an unofficial productivity tool designed for the Taipei City Government official document system. It assists users with text formatting, AI-assisted drafting, automated filing, and auto-login features. **This extension is not affiliated with, endorsed, or sponsored by the Taipei City Government.**
+本擴充功能為非官方開發之生產力工具，與臺北市政府無任何附屬關係。
 
-Local Storage: User preferences such as "File Number" and "Case Number" are stored strictly on the user's local device using chrome.storage.local and are never shared with anyone.
+**2. Information We Do Not Collect (我們不收集的資訊)**
+The developer does not operate any backend servers. This extension does not collect, transmit, store, or sell any personal information, official documents, browsing history, or usage statistics to the developer or any third parties. It contains no tracking or advertising modules.
+開發者未架設任何伺服器。本程式不會收集、傳輸或出售您的任何個人資料、公文內容或瀏覽紀錄給開發者或第三方。
 
-Contact: If you have any questions, please contact the developer via GitHub.
+**3. Information Stored on Your Device (儲存於您設備的資訊)**
+All operational data is saved strictly on your local device or synced via your browser provider (e.g., Google) if you enabled browser sync.
+所有設定與資料僅存於您的本機設備，或隨您的瀏覽器帳號同步：
+
+* **Local Storage (`chrome.storage.local`):** Stores your active document IDs, auto-login account/PinCode (stored in plain text), AI endpoint configurations (including API keys), and debug logs. These stay on your specific device.
+* **Sync Storage (`chrome.storage.sync`):** Stores general preferences (e.g., character limits, prompt templates, UI themes, quick buttons) so they sync across your logged-in browsers. *API keys and account credentials are NOT synced.*
+
+**4. Third-Party AI Services & Data Redaction (AI 服務與個資遮蔽)**
+This extension processes document text only when you explicitly use an AI feature.
+當您主動使用 AI 功能時，擴充功能才會處理公文文字：
+
+* **Local Data Redaction (個資遮蔽):** If enabled in settings, the extension strictly uses regular expressions on your local machine to redact sensitive information (ID numbers, mobile phones, and emails) *before* sending text to any AI model.
+* **Local AI (Recommended):** Text is sent to your local machine (`127.0.0.1` or `localhost`). Data never leaves your computer.
+* **Google Gemini API:** Text is sent to Google's Generative Language API using your provided API key. (Subject to Google's Privacy Policy).
+* **Custom Endpoint:** Text is sent to the HTTPS address you specify.
+**Disclaimer:** Users are solely responsible for ensuring that sending official documents to network AI services complies with their organization's confidentiality rules. 開發者對使用者傳送至第三方 AI 的資料外洩不負任何法律責任。
+
+**5. Permissions Justification (權限使用說明)**
+
+* `storage`: To save your settings and preferences locally.
+* `Host permissions` (`edoc.gov.taipei`): To read document content and automate actions solely on the government system tab.
+* `Host permissions` (`127.0.0.1`, `localhost`, `googleapis.com`): To communicate with your selected AI models.
+* `Optional Host permissions`: Requested only dynamically if you configure a custom HTTPS AI endpoint.
+
+**6. Security Notice (安全性警告)**
+Auto-login passwords and PinCodes are stored in plain text in your browser's local extension storage. **Do not use the auto-login feature on shared or public computers.**
+自動登入的帳號與 PinCode 以明碼保存在本機瀏覽器中，請絕對不要在共用電腦上開啟自動登入功能。
+
+**7. Contact (聯絡開發者)**
+Developer: blues32767
+GitHub: [https://github.com/blues32767](https://github.com/blues32767)
+For any privacy questions or bug reports, please open an issue on the GitHub repository.
