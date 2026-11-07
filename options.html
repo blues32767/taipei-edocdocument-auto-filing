@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-Hant-TW" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>公文意見助手 · 選項（2026.11.06.1300）</title>
+<link rel="stylesheet" href="lib/ui.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到主要內容</a>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark" aria-hidden="true">文</span>
+    <div>
+      <h1>公文意見助手 · 選項</h1>
+      <p>版本 2026.11.06.1300　｜　設定只儲存在這台瀏覽器</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button class="pill" id="btnHelp" type="button">說明與疑難排解 ↗</button>
+    <button class="pill" id="btnTheme" type="button" aria-pressed="false">
+      <span class="sw" aria-hidden="true"></span><span id="themeLabel">黑色配色</span>
+    </button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-label="設定區塊">
+    <a href="#secConn">AI 連線</a>
+        <a href="#secPrompt">提示詞</a>
+    <a href="#secParam">處理參數</a>
+    <a href="#secDebug">除錯</a>
+  </nav>
+
+  <main id="main">
+    <!-- 01 AI 連線（合併 cURL、常用服務與網路 API） -->
+    <section class="sec" id="secConn" aria-labelledby="hConn">
+      <header class="sec-h">
+        <span class="num">01</span>
+        <div><h2 id="hConn">AI 連線方式</h2><p>建議：貼上 LM Studio 的 cURL 指令，網址、埠號與模型會自動帶入。</p></div>
+        <span class="dirty">未儲存變更</span>
+      </header>
+      <div class="sec-b">
+        <div class="seg" role="group" aria-label="連線方式">
+          <button id="modeCurl" type="button" aria-pressed="true">cURL 指令（建議）</button>
+          <button id="modeService" type="button" aria-pressed="false">常用服務（進階）</button>
+          <button id="modeCloud" type="button" aria-pressed="false">網路 API</button>
+        </div>
+
+        <!-- 模式 A：cURL 指令（預設） -->
+        <div id="panelCurl">
+          <label for="localCurl">貼上 cURL 指令</label>
+          <textarea id="localCurl" class="code" rows="7" spellcheck="false" placeholder="curl http://localhost:1234/api/v1/chat \
+  -H &quot;Content-Type:application/json&quot; \
+  -d '{&quot;model&quot;:&quot;qwen/qwen3.5-9b&quot;,&quot;input&quot;:&quot;…&quot;}'"></textarea>
+          <p class="hint" id="curlInfo" role="status">尚未貼上 cURL。</p>
+          <p class="hint" id="curlSyncNote" hidden>埠號與模型 ID 已由 cURL 自動帶入（唯讀）。清空 cURL 即可改回手動填寫。</p>
+          <div class="btn-row">
+            <button id="btnCurlClear" type="button">清空 cURL</button>
+            <a class="link" href="help.html#route-a">查看 LM Studio 貼上教學 →</a>
+          </div>
+        </div>
+
+        <!-- 模式 B：常用服務（LM Studio／Ollama，PORT 與模型 ID 手動填） -->
+        <div id="panelService" hidden>
+          <div class="grid2">
+            <div><label for="preset">常用服務</label><select id="preset"></select></div>
+            <div><label for="localPort">本機 PORT</label><input id="localPort" type="number" min="1" max="65535" inputmode="numeric"></div>
+          </div>
+          <div class="grid2">
+            <div>
+              <label for="model">模型 ID</label>
+              <input id="model" autocomplete="off" placeholder="例如 google/gemma-3-4b">
+              <p class="hint">模型 ID 可在 http://127.0.0.1:PORT/v1/models 查到。</p>
+            </div>
+            <div></div>
+          </div>
+        </div>
+
+        <!-- 模式 C：網路 API -->
+        <div id="panelCloud" hidden>
+          <div class="grid2">
+            <div>
+              <label for="cloudPreset">服務</label>
+              <select id="cloudPreset"><option value="gemini">Google Gemini</option><option value="custom">自訂網址（https）</option></select>
+            </div>
+            <div><label for="model2">模型 ID</label><input id="model2" autocomplete="off" placeholder="gemini-flash-latest"></div>
+          </div>
+          <div id="rowCustom" hidden>
+            <label for="customUrl">自訂 Chat Completions 網址（https，需完整路徑）</label>
+            <input id="customUrl" autocomplete="off" placeholder="https://example.org/v1/chat/completions">
+          </div>
+          <div><label for="apiKey" id="lblKey">API 金鑰</label><input id="apiKey" type="password" autocomplete="off"></div>
+          <p class="warn">網路 API 會把公文文字送到該服務，請先確認機關規定。</p>
+        </div>
+
+        <p class="preview" id="preview" aria-live="polite"></p>
+      </div>
+      <footer class="sec-f">
+        <div class="btn-row"><button id="btnTest" type="button">測試 AI 連線</button></div>
+        <button class="save" type="button" data-save="conn">儲存設定</button>
+      </footer>
+    </section>
+
+    <!-- 03 提示詞 -->
+    <section class="sec" id="secPrompt" aria-labelledby="hPrompt">
+      <header class="sec-h">
+        <span class="num">03</span>
+        <div><h2 id="hPrompt">提示詞</h2><p>{{MAX_CHARS}} 會自動換成擬辦字數上限。留空或還原即使用預設提示詞。</p></div>
+        <span class="dirty">未儲存變更</span>
+      </header>
+      <div class="sec-b">
+        <div>
+          <label for="prompt">擬辦提示詞</label>
+          <textarea id="prompt" rows="10" spellcheck="false"></textarea>
+        </div>
+        <div>
+          <label for="summaryPrompt">重點摘要提示詞</label>
+          <textarea id="summaryPrompt" rows="6" spellcheck="false"></textarea>
+        </div>
+        <div class="btn-row">
+          <button id="btnResetPrompt" type="button">還原擬辦提示詞</button>
+          <button id="btnResetSummary" type="button">還原重點提示詞</button>
+        </div>
+      </div>
+      <footer class="sec-f">
+        <p class="foot-note">提示詞最多 6000 字。</p>
+        <button class="save" type="button" data-save="prompt">儲存設定</button>
+      </footer>
+    </section>
+
+    <!-- 04 處理參數 -->
+    <section class="sec" id="secParam" aria-labelledby="hParam">
+      <header class="sec-h">
+        <span class="num">04</span>
+        <div><h2 id="hParam">處理參數</h2><p>控制字數、文字長度與逾時時間，並決定是否遮蔽個資。</p></div>
+        <span class="dirty">未儲存變更</span>
+      </header>
+      <div class="sec-b">
+        <div class="grid3">
+          <div><label for="draftChars">擬辦字數上限（字）</label><input id="draftChars" type="number" min="30" max="500" step="10"></div>
+          <div><label for="maxChars">公文文字上限（字）</label><input id="maxChars" type="number" min="1000" max="60000" step="500"></div>
+          <div><label for="timeoutSec">AI 請求逾時（秒）</label><input id="timeoutSec" type="number" min="5" max="300"></div>
+        </div>
+        <label class="chk"><input id="redact" type="checkbox"> 送出前遮蔽身分證字號、手機與 Email（市話未遮蔽）</label>
+      </div>
+      <footer class="sec-f">
+        <p class="foot-note">逾時若經常發生，可調高至 120～180 秒（大型本地模型較常見）。</p>
+        <button class="save" type="button" data-save="param">儲存設定</button>
+      </footer>
+    </section>
+
+    <!-- 05 除錯 -->
+    <section class="sec" id="secDebug" aria-labelledby="hDebug">
+      <header class="sec-h">
+        <span class="num">05</span>
+        <div><h2 id="hDebug">除錯</h2><p>記錄等級與紀錄匯出。修改記錄等級後，請重新整理公文頁。</p></div>
+        <span class="dirty">未儲存變更</span>
+      </header>
+      <div class="sec-b">
+        <div>
+          <label for="debugLevel">記錄等級</label>
+          <select id="debugLevel">
+            <option value="ERROR">ERROR</option>
+            <option value="WARN">WARN</option>
+            <option value="INFO">INFO</option>
+            <option value="DEBUG">DEBUG（建議測試用）</option>
+            <option value="TRACE">TRACE（最詳細）</option>
+          </select>
+        </div>
+        <div class="btn-row">
+          <button id="btnExport" type="button">匯出除錯紀錄（JSON）</button>
+          <button id="btnClear" type="button">清除除錯紀錄</button>
+        </div>
+        <p class="hint">匯出前請確認檔案不含公文內容或金鑰；回報問題時只需附上此檔。</p>
+      </div>
+      <footer class="sec-f">
+        <p class="foot-note">除錯紀錄只存在本機瀏覽器。</p>
+        <button class="save" type="button" data-save="debug">儲存設定</button>
+      </footer>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="lib/logger.js"></script>
+<script src="lib/curl.js"></script>
+<script src="options.js"></script>
+<p style="margin:12px 0 0;font-size:12px;opacity:.75">開發者：blues32767　｜　<a href="https://github.com/blues32767" target="_blank" rel="noopener">github.com/blues32767</a>　｜　版本 2026.11.06.1300</p>
+</body>
+</html>

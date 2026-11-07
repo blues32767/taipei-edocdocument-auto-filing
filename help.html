@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-Hant-TW" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>公文意見助手 · 說明與疑難排解（2026.11.06.1300）</title>
+<link rel="stylesheet" href="lib/ui.css">
+<style>
+.route{margin-top:18px;padding:16px 18px;border:1px solid var(--line,#d6dde5);border-radius:12px;scroll-margin-top:90px}
+.route h3{margin:0 0 6px}
+.route h4{margin:14px 0 6px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要內容</a>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark" aria-hidden="true">?</span>
+    <div>
+      <h1>說明與疑難排解</h1>
+      <p>先看「你要用哪一種 AI」，只做其中一條路線即可。</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <a class="pill" href="options.html">← 回到設定</a>
+    <button class="pill" id="btnTheme" type="button" aria-pressed="false"><span class="sw" aria-hidden="true"></span><span id="themeLabel">黑色配色</span></button>
+  </div>
+</header>
+
+<div class="layout">
+ <nav class="toc" aria-label="說明目錄">
+  <a href="#store">一、下載與安裝</a>
+  <a href="#choose">二、選擇 AI 路線</a>
+  <a href="#panel">三、面板快捷按鈕</a>
+  <a href="#trouble">四、疑難排解</a>
+  <a href="#privacy">五、隱私與回報</a>
+ </nav>
+
+ <main id="main" class="prose">
+
+  <section class="sec" id="store" aria-labelledby="hStore">
+   <header class="sec-h"><span class="num">一</span><div><h2 id="hStore">下載與安裝</h2><p>請從官方商店安裝，會自動更新。</p></div></header>
+   <div class="sec-b">
+    <div class="tbl-wrap"><table>
+     <thead><tr><th>瀏覽器</th><th>安裝位置</th></tr></thead>
+     <tbody>
+      <tr><td>Google Chrome</td><td><a href="https://chromewebstore.google.com/detail/%E8%87%BA%E5%8C%97%E5%B8%82%E5%85%AC%E6%96%87%E8%87%AA%E5%8B%95%E5%AD%98%E6%9F%A5%E5%8A%A9%E6%89%8B/oiiaicbnnhogpfihckgkdnmbmclhalmg?authuser=0&amp;hl=zh-TW" target="_blank" rel="noopener">Chrome 線上應用程式商店</a>（搜尋「臺北市公文自動存查助手」）</td></tr>
+      <tr><td>Microsoft Edge</td><td><a href="https://microsoftedge.microsoft.com/addons/detail/%E8%87%BA%E5%8C%97%E5%B8%82%E5%85%AC%E6%96%87%E8%87%AA%E5%8B%95%E5%AD%98%E6%9F%A5%E5%8A%A9%E6%89%8B/ockcmfmilhfkkmleicdkegbjnpjjbnid" target="_blank" rel="noopener">Microsoft Edge 增益集</a></td></tr>
+     </tbody>
+    </table></div>
+    <div class="callout">安裝後，到公文頁按 <b>F5</b> 重新整理，右下角會出現「公文意見助手」。之後更新會由商店自動完成。</div>
+    <p class="hint">名稱說明：商店上的名稱為既有上架名稱，功能已整合為「公文助手」（自動存查、登入自動化、AI 擬辦）。</p>
+   </div>
+  </section>
+
+  <section class="sec" id="choose" aria-labelledby="hChoose">
+   <header class="sec-h"><span class="num">二</span><div><h2 id="hChoose">選擇 AI 路線</h2><p>三條路線<b>擇一</b>即可，不需全部完成。完成後直接跳到「疑難排解」。</p></div></header>
+   <div class="sec-b">
+    <div class="tbl-wrap"><table>
+     <thead><tr><th>路線</th><th>適合對象</th><th>公文去向</th></tr></thead>
+     <tbody>
+      <tr><td><a href="#route-a">A　本地模型＋LM Studio（推薦）</a></td><td>大多數使用者；有一台能跑模型的電腦</td><td>留在本機</td></tr>
+      <tr><td><a href="#route-b">B　網路 API（Google Gemini）</a></td><td>電腦較舊、無法跑本地模型</td><td>送到 Google，需確認機關規定</td></tr>
+      <tr><td><a href="#route-c">C　其他本地服務（Ollama、手動 PORT）</a></td><td>進階使用者，或已在用 Ollama</td><td>留在本機</td></tr>
+     </tbody>
+    </table></div>
+
+    <!-- 路線 A -->
+    <div class="route" id="route-a">
+     <h3>路線 A｜本地模型＋LM Studio（推薦）</h3>
+     <p class="hint">完成後，設定頁應顯示「已解析成功」與「連線成功」。</p>
+     <div class="steps-n"><span class="n">A-1</span><div>安裝 <a href="https://lmstudio.ai/" target="_blank" rel="noopener">LM Studio</a>（lmstudio.ai）。LM Studio 是在個人電腦上下載、管理與執行大型語言模型的桌面應用程式。</div></div>
+     <div class="steps-n"><span class="n">A-2</span><div>安裝後啟動 LM Studio，點左側最下方的 <b>Model Search</b>（Ctrl+Shift+M），搜尋 <code>gemma4 e4b</code> 並按 <b>Download</b>。<br><span class="hint">電腦較舊請選 <code>e2b</code>；有獨立顯卡可選較大的模型。</span></div></div>
+     <div class="steps-n"><span class="n">A-3</span><div>點左側第二個圖示 <b>Developer</b>（Ctrl+2），按右側 <b>+ Load Model</b> 載入剛下載的模型；再把左側的 <b>Status</b> 開關切換為 <b>Running</b>（Ctrl+.）。</div></div>
+     <div class="steps-n"><span class="n">A-4</span><div>點下方已載入模型旁的 <b>&lt;/&gt; cURL</b> 按鈕，複製整段設定值。</div></div>
+     <div class="steps-n"><span class="n">A-5</span><div>回到「公文意見助手 · 選項」頁，於 <b>01 AI 連線方式</b>（預設即為 cURL 指令）貼上，按 <b>儲存設定</b>；網址、埠號與模型 ID 會自動帶入。再按 <b>測試 AI 連線</b>，出現「連線成功，回覆：連線成功」即完成。</div></div>
+     <div class="callout">完成路線 A 後，不需要再設定 Google API、Ollama 或手動填寫 PORT。</div>
+    </div>
+
+    <!-- 路線 B -->
+    <div class="route" id="route-b">
+     <h3>路線 B｜網路 API（Google Gemini）</h3>
+     <p class="hint">公文文字會傳送到 Google，使用前請確認機關規定允許。</p>
+     <div class="steps-n"><span class="n">B-1</span><div>以瀏覽器開啟 <b>Google AI Studio</b>（aistudio.google.com），用 Google 帳號登入。</div></div>
+     <div class="steps-n"><span class="n">B-2</span><div>按 <b>Get API key</b> → <b>Create API key</b>，建立後按 <b>Copy</b>。金鑰等同密碼，不要傳給他人或貼到截圖中。</div></div>
+     <div class="steps-n"><span class="n">B-3</span><div>回到設定頁 <b>01 AI 連線方式</b>，選 <b>網路 API</b>，模型 ID 填 <code>gemini-flash-latest</code>，API 金鑰貼上（前後不要有空白），按 <b>儲存設定</b>，再按 <b>測試 AI 連線</b>。</div></div>
+     <div class="callout warn">Google 的介面與免費額度可能調整，若畫面不同請以 AI Studio 現況為準。</div>
+     <h4>常見錯誤</h4>
+     <div class="tbl-wrap"><table>
+      <thead><tr><th>錯誤訊息</th><th>可能原因</th><th>處理方式</th></tr></thead>
+      <tbody>
+       <tr><td>HTTP 401</td><td>金鑰未填、填錯、多了空白，或已刪除</td><td>重新複製金鑰貼上；金鑰外流時，到 AI Studio 刪除後重建</td></tr>
+       <tr><td>HTTP 403</td><td>API 未啟用、金鑰有使用限制，或地區不支援</td><td>到 AI Studio 確認金鑰可用，或改在另一個專案建立</td></tr>
+       <tr><td>HTTP 404</td><td>模型 ID 錯誤</td><td>改填 <code>gemini-flash-latest</code></td></tr>
+       <tr><td>HTTP 429</td><td>超過免費額度或每分鐘次數上限</td><td>等幾分鐘再試</td></tr>
+      </tbody>
+     </table></div>
+    </div>
+
+    <!-- 路線 C -->
+    <div class="route" id="route-c">
+     <h3>路線 C｜其他本地服務（進階）</h3>
+     <p class="hint">適合已在使用 Ollama，或不想貼 cURL 的進階使用者。</p>
+     <h4>C-1　Ollama（Windows／macOS）</h4>
+     <div class="steps-n"><span class="n">1</span><div>到 ollama.com 下載並安裝，在終端機執行 <code>ollama pull gemma3</code>。</div></div>
+     <div class="steps-n"><span class="n">2</span><div>瀏覽器開啟 <code>http://127.0.0.1:11434/v1/models</code>，複製畫面上的 <code>id</code>。</div></div>
+     <div class="steps-n"><span class="n">3</span><div>設定頁 <b>01 AI 連線方式</b> → 選 <b>常用服務（進階）</b> → 服務選 <b>Ollama</b>，PORT 為 <code>11434</code>，模型 ID 貼上 → 儲存 → 測試連線。</div></div>
+     <div class="callout warn">若出現 HTTP 403（forbidden origin），請設定環境變數 <code>OLLAMA_ORIGINS</code> 為 <code>*</code>，重新啟動 Ollama 後再測試。</div>
+     <h4>C-2　LM Studio 手動填 PORT（不貼 cURL）</h4>
+     <div class="steps-n"><span class="n">1</span><div>完成路線 A 的 A-1 至 A-3（載入模型並啟動 Running）。</div></div>
+     <div class="steps-n"><span class="n">2</span><div>瀏覽器開啟 <code>http://127.0.0.1:1234/v1/models</code>，複製 <code>id</code>（例如 <code>google/gemma-3-4b</code>）。</div></div>
+     <div class="steps-n"><span class="n">3</span><div>設定頁選 <b>常用服務（進階）</b> → 服務選 <b>LM Studio</b>，PORT 填 <code>1234</code>，模型 ID 貼上 → 儲存 → 測試連線。</div></div>
+     <div class="callout">若 cURL 欄位有內容，會優先使用 cURL。要改用手動 PORT，請先按「清空 cURL」再儲存。</div>
+    </div>
+   </div>
+  </section>
+
+  <section class="sec" id="panel" aria-labelledby="hPanel">
+   <header class="sec-h"><span class="num">三</span><div><h2 id="hPanel">面板快捷按鈕</h2><p>公文頁右下角的面板，依用途分為兩組。可在面板的「快捷按鈕、提示詞與字數設定」中勾選要顯示的按鈕。</p></div></header>
+   <div class="sec-b">
+    <h3>一般工具（不使用 AI）</h3>
+    <div class="tbl-wrap"><table>
+     <thead><tr><th>按鈕</th><th>功能</th><th>注意事項</th></tr></thead>
+     <tbody>
+      <tr><td>複製日期-文號-主旨</td><td>從公文擷取「發文日期、發文字號、主旨」，組成一行檔名格式，例如 <code>1151019-北市教專字第1156010644號-敦聘…請查照。</code>，並複製到剪貼簿，方便重新命名檔案。</td><td>缺少任一欄位時會提示「未辨識到：…」。</td></tr>
+      <tr><td>複製全文到剪貼簿</td><td>將公文文字（已去除裝訂線、頁碼與斷行）複製到剪貼簿。</td><td>若瀏覽器阻擋自動複製，會改開視窗，請按「複製全文」。</td></tr>
+      <tr><td>開啟純文字</td><td>在獨立文字視窗中檢視公文，可直接<b>編輯、刪除不需要的段落</b>，再按「複製全文」或「下載 .txt」。</td><td>誤刪可按「還原原文」。關閉前若有未複製的修改會先提醒。</td></tr>
+     </tbody>
+    </table></div>
+
+    <h3>AI 功能（需設定模型）</h3>
+    <div class="tbl-wrap"><table>
+     <thead><tr><th>按鈕</th><th>功能</th><th>注意事項</th></tr></thead>
+     <tbody>
+      <tr><td>AI 擬稿</td><td>依提示詞產生擬辦草稿，並填入「我的意見」欄位。</td><td>不會自動送出，請自行確認。若欄位已有文字，會詢問覆蓋或附加。</td></tr>
+      <tr><td>AI重點摘要</td><td>依提示詞整理公文重點，於獨立視窗顯示，可下載或複製。</td><td>僅供閱讀，不會寫入意見。</td></tr>
+     </tbody>
+    </table></div>
+    <div class="callout">面板標題列的「—」可把面板縮成「助」圖示；三種狀態都可以拖曳移動，避免擋住公文內容。</div>
+   </div>
+  </section>
+
+  <section class="sec" id="trouble" aria-labelledby="hTrouble">
+   <header class="sec-h"><span class="num">四</span><div><h2 id="hTrouble">疑難排解</h2><p>依現象找原因。大多數問題都是「沒重新整理」或「PORT／模型不一致」。</p></div></header>
+   <div class="sec-b">
+    <details class="faq" open>
+     <summary>公文頁右下角沒有出現「公文意見助手」面板</summary>
+     <div class="body prose"><ol>
+      <li>到 <code>chrome://extensions</code> 確認本擴充套件已啟用，再回公文頁按 <b>F5</b>。</li>
+      <li>網址開頭須為 <code>https://edoc.gov.taipei/tcqb/oa/</code>。</li>
+      <li>公文簽核小框（網址含 <code>app=genpages</code>）刻意不顯示面板。</li>
+     </ol></div>
+    </details>
+    <details class="faq">
+     <summary>貼上 cURL 後顯示「cURL 格式有誤」</summary>
+     <div class="body prose"><ul>
+      <li>請整段複製，包含 <code>-d '…'</code> 單引號內的 JSON。</li>
+      <li>JSON 必須含 <code>"model"</code> 欄位。</li>
+      <li>建議直接使用 LM Studio 的 cURL 按鈕複製，不要手動改寫換行。</li>
+     </ul></div>
+    </details>
+    <details class="faq">
+     <summary>無法連線（Failed to fetch、connection refused）</summary>
+     <div class="body prose"><ul>
+      <li>確認 LM Studio 的 Status 為 <b>Running</b>，或 Ollama 已在執行。</li>
+      <li>埠號要與伺服器一致（LM Studio 預設 1234；Ollama 預設 11434）。</li>
+      <li>防火牆可能阻擋，請允許 LM Studio 或 Ollama 的連線。</li>
+     </ul></div>
+    </details>
+    <details class="faq">
+     <summary>HTTP 404、模型未載入、HTTP 400 或 500</summary>
+     <div class="body prose"><ul>
+      <li><b>404</b>：模型 ID 錯誤，請重新複製 cURL，或到 <code>/v1/models</code> 查詢。</li>
+      <li><b>400／500</b>：模型尚未 Load，載入後再測試。</li>
+     </ul></div>
+    </details>
+    <details class="faq">
+     <summary>顯示「尚未允許 https://… 的存取權限」</summary>
+     <div class="body prose"><p>cURL 或自訂網址指向非本機網址時，Chrome 需要授權一次。請在設定頁按「儲存設定」，並在跳出的權限視窗按「允許」。</p></div>
+    </details>
+    <details class="faq">
+     <summary>逾時</summary>
+     <div class="body prose"><p>模型太大或記憶體不足。請換小模型，或在「處理參數」把逾時調到 120～180 秒後儲存。</p></div>
+    </details>
+    <details class="faq">
+     <summary>設定儲存了，但面板行為沒有改變</summary>
+     <div class="body prose"><p>設定需要重新整理公文頁才會生效，儲存後請按 F5。</p></div>
+    </details>
+   </div>
+  </section>
+
+  <section class="sec" id="privacy" aria-labelledby="hPrivacy">
+   <header class="sec-h"><span class="num">五</span><div><h2 id="hPrivacy">隱私與回報問題</h2><p>使用前請先確認機關規定。</p></div></header>
+   <div class="sec-b">
+    <ul>
+     <li><b>本地模型（路線 A、C）</b>：公文只在你的電腦與本機伺服器之間傳遞。</li>
+     <li><b>網路 API（路線 B）</b>：公文文字會傳送到該服務商。</li>
+     <li>送出前可勾選「遮蔽身分證字號、手機與 Email」（市話不會遮蔽）。</li>
+     <li>AI 產生的擬辦與重點僅供參考，<b>送出前請承辦人自行確認</b>。</li>
+    </ul>
+    <div class="callout">回報問題時，到設定頁「除錯」按 <b>匯出除錯紀錄</b>，連同錯誤訊息一起提供。<b>不要</b>附上 API 金鑰或公文內容。</div>
+   </div>
+  </section>
+ </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="lib/logger.js"></script>
+<script src="lib/help.js"></script>
+<p style="margin:12px 0 0;font-size:12px;opacity:.75">開發者：blues32767　｜　<a href="https://github.com/blues32767" target="_blank" rel="noopener">github.com/blues32767</a>　｜　版本 2026.11.06.1300</p>
+<p style="margin:12px 0 0;font-size:12px;opacity:.75">開發者：blues32767　｜　<a href="https://github.com/blues32767" target="_blank" rel="noopener">github.com/blues32767</a>　｜　版本 2026.11.06.1300</p>
+</body>
+</html>

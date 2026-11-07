@@ -1,0 +1,26 @@
+{
+  "appName": {
+    "message": "臺北市公文系統助手(非官方)",
+    "description": "擴充套件名稱（商城顯示，45 字以內）"
+  },
+  "shortName": {
+    "message": "公文助手",
+    "description": "簡稱（12 字以內）"
+  },
+  "appDesc": {
+    "message": "公文 AI 擬辦、重點摘要與純文字整理，待結案公文自動存查，並支援登入頁自動登入（臺北市公文系統）。",
+    "description": "商城描述（132 字以內）"
+  },
+  "actionTitle": {
+    "message": "臺北市公文系統助手：開啟設定",
+    "description": "工具列按鈕提示"
+  },
+  "developerName": {
+    "message": "blues32767",
+    "description": "開發者"
+  },
+  "developerUrl": {
+    "message": "https://github.com/blues32767",
+    "description": "開發者網址"
+  }
+}

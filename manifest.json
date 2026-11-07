@@ -1,27 +1,102 @@
 {
   "manifest_version": 3,
-  "name": "公文自動存查-(20250320)",
-  "version": "1.1",
-  "description": "臺北市公文自動存查，支援多入口網域",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_shortName__",
+  "description": "__MSG_appDesc__",
+  "author": "blues32767",
+  "homepage_url": "https://github.com/blues32767",
+  "version": "3.6",
+  "default_locale": "zh_TW",
+  "minimum_chrome_version": "111",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "__MSG_actionTitle__",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
   "permissions": [
-    "activeTab",
-    "scripting",
     "storage"
   ],
-  "action": {
-    "default_popup": "popup.html"
-  },
+  "host_permissions": [
+    "http://127.0.0.1/*",
+    "http://localhost/*",
+    "https://generativelanguage.googleapis.com/*"
+  ],
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
   "background": {
     "service_worker": "background.js"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
   },
   "content_scripts": [
     {
       "matches": [
-        "https://edoc.gov.taipei/*",
-        "https://doc.gov.taipei/*" 
+        "https://edoc.gov.taipei/tcqb/oa/*"
       ],
-      "js": ["content.js"],
-      "run_at": "document_end"
+      "js": [
+        "hook-main.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://edoc.gov.taipei/tcqb/oa/*"
+      ],
+      "js": [
+        "paste-main.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://edoc.gov.taipei/tcqb/oa/*"
+      ],
+      "js": [
+        "lib/logger.js",
+        "lib/curl.js",
+        "lib/textclean.js",
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://edoc.gov.taipei/*"
+      ],
+      "js": [
+        "autologin.js",
+        "autofiling.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "vendor/pdf.mjs",
+        "vendor/pdf.worker.mjs"
+      ],
+      "matches": [
+        "https://edoc.gov.taipei/*"
+      ]
     }
   ]
 }
