@@ -72,13 +72,15 @@ async function initialize() {
 }
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+ if (!sender || sender.id !== chrome.runtime.id) { sendResponse({ success: false, error: '拒絕存取' }); return false; }
+ request = request || {};
   if (request.toggleAuto) {
     const status = toggleAuto();
     sendResponse({ status: status });
   }
   else if (request.updateSettings) {
-    if (request.fileNumber) CONFIG.fileNumber = request.fileNumber;
-    if (request.caseNumber) CONFIG.caseNumber = request.caseNumber;
+    if (request.fileNumber) CONFIG.fileNumber = sanitizeCode(request.fileNumber);
+    if (request.caseNumber) CONFIG.caseNumber = sanitizeCode(request.caseNumber);
     sendResponse({ success: true, fileNumber: CONFIG.fileNumber, caseNumber: CONFIG.caseNumber });
   }
   else if (request.checkStatus) {
@@ -352,10 +354,14 @@ function setAutoDisableTimer() {
   }, CONFIG.autoDisableTime * 60 * 1000);
 }
 
+function sanitizeCode(v) {
+ return String(v == null ? '' : v).replace(/[^0-9A-Za-z]/g, '').slice(0, 16);
+}
+
 function showNotification(title, message) {
   const notification = document.createElement('div');
   notification.className = 'auto-disable-notification';
-  notification.innerHTML = `<div class="notification-title">${title}</div><div class="notification-message">${message}</div>`;
+  const tEl = document.createElement('div');tEl.className = 'notification-title';tEl.textContent = String(title);const mEl = document.createElement('div');mEl.className = 'notification-message';mEl.textContent = String(message);notification.appendChild(tEl);notification.appendChild(mEl);
 
   const style = document.createElement('style');
   style.textContent = `

@@ -1,0 +1,13 @@
+# 不要提交任何真實設定、金鑰或公文資料
+.env
+*.pem
+*.key
+*.crt
+*secret*
+*credential*
+*.log
+node_modules/
+.DS_Store
+Thumbs.db
+output/
+*.zip

@@ -1,397 +1,468 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>臺北市政府公文自動存查助手</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #1e88e5;
-            --secondary-color: #43a047;
-            --accent-color: #ff5722;
-            --text-color: #333333;
-            --light-bg: #f8f9fa;
-            --dark-bg: #263238;
-            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            font-family: 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--light-bg);
-            padding: 0;
-            margin: 0;
-        }
-        
-        .header {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-            z-index: 1;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        
-        .content {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-        
-        h2 {
-            font-size: 1.8rem;
-            margin: 2rem 0 1rem;
-            color: var(--primary-color);
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        
-        h3 {
-            font-size: 1.4rem;
-            margin: 1.5rem 0 1rem;
-            color: var(--secondary-color);
-        }
-        
-        p {
-            margin-bottom: 1rem;
-        }
-        
-        ul, ol {
-            margin-left: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .badge-container {
-            display: flex;
-            gap: 10px;
-            margin: 1rem 0;
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: white;
-        }
-        
-        .badge-blue {
-            background-color: var(--primary-color);
-        }
-        
-        .badge-green {
-            background-color: var(--secondary-color);
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        
-        .feature-card {
-            background-color: #f5f7fa;
-            border-left: 4px solid var(--primary-color);
-            padding: 1.2rem;
-            border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-title {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-        
-        .step-container {
-            counter-reset: step-counter;
-            margin: 2rem 0;
-        }
-        
-        .step {
-            display: flex;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-        
-        .step-number {
-            background-color: var(--primary-color);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin-right: 1rem;
-            flex-shrink: 0;
-        }
-        
-        .step-content {
-            flex: 1;
-        }
-        
-        .step-title {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        
-        .note-box {
-            background-color: #fff8e1;
-            border-left: 4px solid #ffc107;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-        }
-        
-        .note-title {
-            font-weight: 700;
-            color: #f57c00;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .note-title::before {
-            content: "⚠️";
-            margin-right: 0.5rem;
-        }
-        
-        code {
-            background-color: #f1f1f1;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: Consolas, Monaco, 'Andale Mono', monospace;
-            font-size: 0.9em;
-        }
-        
-        .download-section {
-            text-align: center;
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background-color: #e8f5e9;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .download-button {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            font-weight: 700;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
-            font-size: 1.1rem;
-        }
-        
-        .download-button:hover {
-            background-color: #e64a19;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(255, 87, 34, 0.4);
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            background-color: var(--dark-bg);
-            color: white;
-            margin-top: 3rem;
-        }
-        
-        .intro-section {
-            margin-bottom: 2rem;
-        }
-        
-        .intro-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-        
-        .highlight-box {
-            background-color: #e3f2fd;
-            border-left: 4px solid var(--primary-color);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 8px;
-        }
-        
-        @media (max-width: 768px) {
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .content {
-                padding: 1.5rem;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            .download-button {
-                padding: 0.8rem 1.5rem;
-                font-size: 1rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>臺北市公文助手｜非官方工具</title>
+<meta name="description" content="臺北市政府公文系統的非官方瀏覽器擴充功能：快速複製公文資訊、Word 段落自動分行、待結案公文自動存查，並可選用 AI 輔助。">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+:root{
+  --ink:#1c1f23;
+  --ink-2:#3d4248;
+  --muted:#60666d;
+  --paper:#ffffff;
+  --mist:#f5f6f4;
+  --line:#e2e4df;
+  --accent:#4a7b8a;        /* 柔和的灰藍綠，取代原本的紅色 */
+  --accent-deep:#365e6b;
+  --accent-soft:#e7f0f2;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --wrap:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;
+  color:var(--ink);background:var(--paper);line-height:1.8;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;z-index:100}
+.skip:focus{left:12px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Header */
+.site-header{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid transparent;transition:border-color .3s var(--ease);
+}
+.site-header.is-scrolled{border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:15px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex:none}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{display:block;padding:8px 12px;border-radius:999px;text-decoration:none;font-size:14px;color:var(--ink-2);transition:background .2s,color .2s}
+.nav-links a:hover{background:var(--mist);color:var(--ink)}
+.nav-links .nav-cta{background:var(--ink);color:#fff}
+.nav-links .nav-cta:hover{background:var(--accent);color:#fff}
+
+/* Hero */
+.hero{padding:clamp(72px,11vw,128px) 0 clamp(64px,9vw,104px)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:500;color:var(--muted);letter-spacing:.08em}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--accent)}
+.hero h1{margin-top:24px;font-size:clamp(2.4rem,6.4vw,4.8rem);font-weight:900;line-height:1.12;letter-spacing:-.02em;max-width:16ch}
+.hero h1 .accent{color:var(--accent)}
+.hero .lead{margin-top:26px;font-size:clamp(1.02rem,1.5vw,1.16rem);color:var(--ink-2);max-width:46ch}
+.actions{margin-top:38px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;
+  font-weight:700;font-size:15px;text-decoration:none;border:1.5px solid var(--ink);
+  transition:transform .3s var(--ease),background .3s,color .3s,border-color .3s;
+}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-deep);border-color:var(--accent-deep);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff;transform:translateY(-2px)}
+.btn .arrow{transition:transform .3s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
+
+.quick{margin-top:60px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.quick div{padding:20px 0 0}
+.quick div+div{padding-left:24px;border-left:1px solid var(--line)}
+.quick dt{font-size:13px;color:var(--muted)}
+.quick dd{font-size:1.02rem;font-weight:500;margin-top:6px;color:var(--ink-2)}
+
+/* Notice */
+.notice{background:var(--accent-soft);border-block:1px solid #d3e3e8}
+.notice .wrap{padding-block:18px;display:flex;gap:14px;align-items:flex-start;font-size:14.5px;color:var(--ink-2)}
+.notice strong{color:var(--ink)}
+
+/* Sections */
+section.block{padding:clamp(72px,10vw,118px) 0}
+.block + .block{border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:24px;margin-bottom:52px}
+.sec-no{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.12em;padding-top:8px;display:flex;align-items:center;gap:10px}
+.sec-no::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.sec-title{font-size:clamp(1.8rem,3.8vw,2.6rem);font-weight:900;line-height:1.25}
+.sec-desc{margin-top:12px;color:var(--muted);max-width:58ch}
+
+/* Feature grid */
+.features{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--ink)}
+.feature{position:relative;padding:30px 32px 34px 0;border-bottom:1px solid var(--line)}
+.feature:nth-child(even){padding-left:32px;padding-right:0;border-left:1px solid var(--line)}
+.feature::before{content:"";position:absolute;left:0;top:-1px;height:2px;width:0;background:var(--accent);transition:width .5s var(--ease)}
+.feature:nth-child(even)::before{left:32px}
+.feature:hover::before{width:56px}
+.feature h3{font-size:1.18rem;font-weight:700;display:flex;align-items:center;gap:12px}
+.feature h3 .tag{font-size:12px;color:var(--accent);font-weight:700;border:1px solid #cfe0e5;background:var(--accent-soft);padding:2px 9px;border-radius:999px;white-space:nowrap}
+.feature p{margin-top:10px;color:var(--muted);font-size:15px}
+.feature .tip{margin-top:10px;font-size:14px;color:var(--ink-2)}
+
+/* Steps */
+.steps{list-style:none;counter-reset:s;max-width:760px}
+.steps li{counter-increment:s;position:relative;padding:0 0 34px 64px}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{
+  content:counter(s,decimal-leading-zero);position:absolute;left:0;top:0;width:44px;height:44px;
+  border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;
+  font-size:14px;font-weight:700;background:#fff;transition:background .3s,color .3s,border-color .3s;
+}
+.steps li:hover::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.steps li::after{content:"";position:absolute;left:21.5px;top:48px;bottom:0;width:1px;background:var(--line)}
+.steps li:last-child::after{display:none}
+.steps h3{font-size:1.08rem;font-weight:700;padding-top:6px}
+.steps p{color:var(--muted);font-size:15px;margin-top:4px}
+
+/* Settings table */
+.table-wrap{max-width:920px}
+.settings{width:100%;border-collapse:collapse}
+.settings th,.settings td{text-align:left;padding:20px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.settings thead th{font-size:12.5px;color:var(--muted);font-weight:500;border-bottom:1px solid var(--ink);padding-bottom:12px}
+.settings tbody th{font-size:15px;font-weight:700;width:200px;padding-right:24px}
+.settings td{color:var(--ink-2);font-size:15px}
+.settings code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:var(--mist);border:1px solid var(--line);padding:2px 8px;border-radius:6px}
+
+/* Notes */
+.notes{display:grid;max-width:920px;border-top:1px solid var(--ink)}
+.note{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:22px 0;border-bottom:1px solid var(--line)}
+.note .mark{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:10px}
+.note h3{font-size:1.02rem;font-weight:700}
+.note p{color:var(--muted);font-size:15px;margin-top:4px}
+
+/* FAQ */
+.faq{max-width:920px;border-top:1px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;font-weight:700;position:relative;font-size:1.02rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:24px;font-weight:300;color:var(--accent);transition:transform .35s var(--ease)}
+.faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.faq details p{padding:0 0 22px;color:var(--muted);font-size:15px;max-width:70ch}
+
+/* Install */
+.install{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:920px}
+.card{border:1px solid var(--line);border-radius:6px;padding:30px;background:#fff;transition:border-color .3s,transform .4s var(--ease)}
+.card:hover{border-color:var(--ink);transform:translateY(-3px)}
+.card h3{font-size:1.12rem;font-weight:700}
+.card p{margin-top:8px;color:var(--muted);font-size:15px}
+.card ol{margin:16px 0 0 1.2em;color:var(--ink-2);font-size:15px}
+.card li{margin-top:6px}
+.card .btn{margin-top:22px;width:100%;justify-content:center}
+.update{margin-top:40px;max-width:920px;display:flex;gap:24px;padding:22px 0;border-top:1px solid var(--line)}
+.update time{font-weight:700;white-space:nowrap;min-width:110px;color:var(--accent)}
+.update p{color:var(--ink-2);font-size:15px}
+
+/* Footer */
+.site-footer{background:var(--ink);color:#d6d8d4;padding:56px 0 40px;font-size:14px}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.site-footer .brand{color:#fff}
+.site-footer p{margin-top:10px;max-width:58ch;color:#a6aaa6;font-size:13px}
+.site-footer a{color:#fff;text-underline-offset:4px}
+
+/* Motion */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .reveal.is-in{opacity:1;transform:none}
+.js .reveal.d1{transition-delay:.08s}
+.js .reveal.d2{transition-delay:.16s}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms !important;animation:none !important}
+  .js .reveal{opacity:1;transform:none}
+}
+
+/* Responsive */
+@media (max-width:900px){
+  .sec-head{grid-template-columns:1fr;gap:12px}
+  .features{grid-template-columns:1fr}
+  .feature:nth-child(even){padding-left:0;border-left:0}
+  .feature:nth-child(even)::before{left:0}
+  .install{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .nav-links li:not(:last-child){display:none}
+  .quick{grid-template-columns:1fr}
+  .quick div+div{padding-left:0;border-left:0;margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+  .settings thead{display:none}
+  .settings tr{display:block;border-bottom:1px solid var(--line);padding:14px 0}
+  .settings th,.settings td{display:block;border:0;padding:0;width:auto}
+  .settings th{padding-bottom:4px}
+  .note{grid-template-columns:22px 1fr}
+  .update{flex-direction:column;gap:6px}
+  .sec-head{margin-bottom:36px}
+}
+</style>
 </head>
 <body>
-    <div class="header">
-        <div class="header-content">
-            <h1>臺北市政府公文自動存查助手</h1>
-            <p>taipei-edoc-Document Auto-Filing Assistant</p>
-            <div class="badge-container">
-                <span class="badge badge-blue">版本 1.0</span>
-                <span class="badge badge-green">MIT 授權</span>
-            </div>
+
+<a class="skip" href="#main">跳到主要內容</a>
+
+<header class="site-header" id="top">
+  <nav class="wrap nav" aria-label="主選單">
+    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>臺北市公文助手</a>
+    <ul class="nav-links">
+      <li><a href="#features">功能</a></li>
+      <li><a href="#auto">自動存查</a></li>
+      <li><a href="#usage">怎麼用</a></li>
+      <li><a href="#notes">注意事項</a></li>
+      <li><a href="#faq">常見問題</a></li>
+      <li><a class="nav-cta" href="#install">安裝</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <p class="eyebrow reveal">臺北市政府公文系統・非官方工具</p>
+      <h1 id="hero-title" class="reveal d1">寫公文更順手，<br><span class="accent">重複的事交給它。</span></h1>
+      <p class="lead reveal d2">臺北市公文助手是一個安裝在 Chrome 或 Edge 瀏覽器裡的小工具。它能幫您快速複製公文資訊、把 Word 的段落整理進「說明」欄位，也能自動完成待結案公文的存查。</p>
+      <div class="actions reveal d2">
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/oiiaicbnnhogpfihckgkdnmbmclhalmg?utm_source=item-share-cb" target="_blank" rel="noopener">安裝擴充功能 <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#usage">先看怎麼用</a>
+      </div>
+      <dl class="quick reveal d2">
+        <div><dt>適用系統</dt><dd>臺北市政府公文系統</dd></div>
+        <div><dt>適用瀏覽器</dt><dd>Google Chrome、Microsoft Edge</dd></div>
+        <div><dt>是否需要 AI</dt><dd>不需要，AI 功能為選用</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="notice" role="note">
+    <div class="wrap">
+      <span class="dot" style="margin-top:8px" aria-hidden="true"></span>
+      <p><strong>本工具不是臺北市政府官方產品。</strong>使用前請先確認您機關的資訊安全規定，並依規定使用。</p>
+    </div>
+  </div>
+
+  <!-- 01 Features -->
+  <section class="block" id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-no">01</div>
+        <div>
+          <h2 class="sec-title" id="features-title">主要功能</h2>
+          <p class="sec-desc">打開公文頁面，右下角會出現「公文助手」面板，常用功能都在這裡。</p>
         </div>
+      </div>
+      <div class="features">
+        <article class="feature reveal">
+          <h3>複製日期、文號與主旨 <span class="tag">不需 AI</span></h3>
+          <p>一鍵組合「發文日期-發文字號-主旨」，產生標準檔名並自動複製，貼到資料夾或檔案就能用。</p>
+        </article>
+        <article class="feature reveal d1">
+          <h3>複製全文到剪貼簿 <span class="tag">不需 AI</span></h3>
+          <p>把公文內容整段複製下來，方便貼到 Word、信件或其他文件。</p>
+        </article>
+        <article class="feature reveal">
+          <h3>開啟純文字 <span class="tag">不需 AI</span></h3>
+          <p>在獨立的文字視窗中閱讀與整理公文，可以刪除不需要的段落，也可以下載成文字檔。</p>
+        </article>
+        <article class="feature reveal d1">
+          <h3>寫入說明內容 <span class="tag">不需 AI</span></h3>
+          <p>從 Word 複製多段文字，一按就能依段落寫入公文的「說明」欄位，不必一段一段手動貼上。</p>
+          <p class="tip">自動去掉「一、」「(一)」「1.」等編號，寫入時會逐段進行。</p>
+        </article>
+        <article class="feature reveal">
+          <h3>AI 擬稿 <span class="tag">選用</span></h3>
+          <p>依您輸入的提示，產生擬辦草稿並填入「我的意見」。內容需由您自行檢查，系統不會自動送出。</p>
+        </article>
+        <article class="feature reveal d1">
+          <h3>AI 重點摘要 <span class="tag">選用</span></h3>
+          <p>快速整理公文的重點，結果顯示在文字視窗中，方便先讀過再決定如何處理。</p>
+        </article>
+      </div>
     </div>
-    
-    <div class="container">
-        <div class="content">
-            <!-- 下載按鈕移至最上方 -->
-            <div class="download-section">
-                <h2 style="margin-top: 0; border-bottom: none; color: var(--accent-color);">立即下載</h2>
-                <p style="margin-bottom: 1.5rem;">快速提升公文處理效率，一鍵自動化存查作業</p>
-                <a href="https://chromewebstore.google.com/detail/oiiaicbnnhogpfihckgkdnmbmclhalmg?utm_source=item-share-cb" class="download-button">安裝Chrome擴充套件</a>
-            </div>
-            
-            <!-- 簡介部分 -->
-            <div class="intro-section">
-                <p class="intro-text">公文自動存查助手是一個 Chrome 擴充功能，專為臺北市政府公文系統設計，可自動化執行待結案公文同一檔號之存查作業，提升公文處理效率。</p>
-                <div class="highlight-box">
-                    <p><strong>重要提示：</strong></p>
-                    <ul style="margin-bottom: 0;">
-                        <li>尚未支援"解除列管"功能，待之後更新。</li>
-                        <li>預設存查【檔號:03010101、案號:1】，可透過擴充套件設定修改。</li>
-                    </ul>
-                </div>
-            </div>
-                        
-            <!-- 注意事項 -->
-            <div class="note-box">
-                <div class="note-title">注意事項</div>
-                <ul>
-                    <li>請僅在[待結案]頁面啟用：此擴充套件僅在[待結案]頁面執行自動存查功能。當您完成存查後，擴充套件會自動關閉以避免干擾其他操作。</li>
-                    <li>清空非存查公文：在[待結案]頁面，請清空到只剩下同一類存查[檔號]的公文。此套件不會自動分類公文，請自行確認公文的分類。</li>
-                    <li>紙本文數量：遇到需要填寫紙本文數量的公文時，如果擴充套件卡住，請手動填寫數量後，擴充套件會繼續執行。</li>
-                    <li>修改預設檔號和案次號：如果需要修改預設的檔號或案次號，請用記事本打開 content.js 檔案，並修改 fileNumber（檔號）和 caseNumber（案次號）變數的值。</li>
-                </ul>
-            </div>
-            
-            <!-- 使用方法 -->
-            <h2>使用方法</h2>
-            <ol>
-                <li>登入公文系統，進入待處理公文頁面</li>
-                <li>點擊"擴充功能"圖示，開啟設定面板</li>
-                <li>輸入所需的<strong>檔號</strong>與<strong>案次號</strong>，點擊「儲存設定」</li>
-                <li>點擊「開啟自動存查功能」按鈕開始自動化處理</li>
-                <li>系統將依序自動勾選未處理公文並執行存查操作</li>
-                <li>在存檔頁面，系統將自動填入設定的檔號與案次號並提交</li>
-            </ol>
-            
-            <!-- 主要功能 -->
-            <h2>主要功能</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-title">自動存查</div>
-                    <p>一鍵自動勾選待處理公文並執行存查操作</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-title">自動存檔</div>
-                    <p>自動填寫檔號與案次號，完成公文存檔流程</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-title">可自訂檔號與案次號</div>
-                    <p>透過擴充套件按鈕設定，無需修改程式碼</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-title">安全機制</div>
-                    <p>10分鐘後自動關閉功能，避免長時間運行產生問題</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-title">狀態顯示</div>
-                    <p>頁面右上角顯示目前自動化功能狀態</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-title">通知提醒</div>
-                    <p>功能自動關閉時會顯示通知</p>
-                </div>
-            </div>
-            
-            <!-- 自訂設定 -->
-            <h2>自訂設定</h2>
-            <p>擴充套件提供以下自訂選項：</p>
-            <ul>
-                <li><strong>檔號</strong>：公文歸檔的檔號，例如「03010101」(綜合業務-3年)</li>
-                <li><strong>案次號</strong>：公文歸檔的案次號，例如「1」(綜合業務-3)</li>
-                <li><strong>自動關閉時間</strong>：預設 10 分鐘後自動關閉功能</li>
-            </ul>
+  </section>
+
+  <!-- 02 Auto filing -->
+  <section class="block" id="auto" aria-labelledby="auto-title">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-no">02</div>
+        <div>
+          <h2 class="sec-title" id="auto-title">待結案公文自動存查</h2>
+          <p class="sec-desc">在「待結案」頁面，系統會依序勾選同一檔號的公文，逐件完成存查，並自動填入您設定的檔號與案次號。</p>
         </div>
+      </div>
+      <div class="features">
+        <article class="feature reveal"><h3>一鍵批次存查</h3><p>自動勾選待處理公文並依序存查，省下逐件點選的時間。</p></article>
+        <article class="feature reveal d1"><h3>自動填寫存檔資料</h3><p>進入存檔頁面後，自動填入檔號與案次號並送出。</p></article>
+        <article class="feature reveal"><h3>自訂檔號與案次號</h3><p>在設定頁填寫即可，不需要改任何程式碼。預設為檔號 03010101、案次號 1。</p></article>
+        <article class="feature reveal d1"><h3>10 分鐘自動停止</h3><p>啟動後超過 10 分鐘會自動停止，避免長時間執行造成混亂。</p></article>
+      </div>
     </div>
-    
-    <div class="footer">
-        <p>©Developer ：blues32767</p>
+  </section>
+
+  <!-- 03 Usage -->
+  <section class="block" id="usage" aria-labelledby="usage-title">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-no">03</div>
+        <div>
+          <h2 class="sec-title" id="usage-title">怎麼用</h2>
+          <p class="sec-desc">第一次使用，依序做完下面幾個步驟即可。</p>
+        </div>
+      </div>
+      <ol class="steps">
+        <li class="reveal"><h3>安裝擴充功能</h3><p>點上方「安裝擴充功能」，依畫面指示加入瀏覽器，完成後重新整理公文頁面（按 F5）。</p></li>
+        <li class="reveal"><h3>打開公文頁面</h3><p>進入公文系統，右下角會出現「公文助手」面板。</p></li>
+        <li class="reveal"><h3>複製或寫入內容</h3><p>需要複製文號或主旨時，按「複製日期-文號-主旨」；需要寫入段落時，先在 Word 複製內容，再按「寫入說明內容」。</p></li>
+        <li class="reveal"><h3>（選用）設定 AI</h3><p>如果想使用 AI 擬稿或摘要，請到擴充功能的設定頁，依畫面說明完成設定。不設定也能使用其他功能。</p></li>
+        <li class="reveal"><h3>（選用）設定自動存查</h3><p>在設定頁填寫檔號與案次號並儲存，進入「待結案」頁面後按下「開啟自動存查功能」。</p></li>
+      </ol>
     </div>
+  </section>
+
+  <!-- 04 Settings -->
+  <section class="block" id="settings" aria-labelledby="settings-title">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-no">04</div>
+        <div>
+          <h2 class="sec-title" id="settings-title">設定說明</h2>
+          <p class="sec-desc">所有設定都儲存在您自己的瀏覽器裡，本工具不會把它們傳到其他地方。</p>
+        </div>
+      </div>
+      <div class="table-wrap reveal">
+        <table class="settings">
+          <thead><tr><th scope="col">項目</th><th scope="col">說明與預設值</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">檔號</th><td>公文歸檔用的檔號，例如 <code>03010101</code>（綜合業務－3 年）。</td></tr>
+            <tr><th scope="row">案次號</th><td>公文歸檔用的案次號，例如 <code>1</code>。</td></tr>
+            <tr><th scope="row">AI 連線</th><td>選用。可連接本機 AI 或雲端 AI，請留意雲端服務會接收您送出的文字。</td></tr>
+            <tr><th scope="row">遮蔽個人資料</th><td>選用。開啟後，送給 AI 前會先遮蔽身分證字號、手機與 Email。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Notes -->
+  <section class="block" id="notes" aria-labelledby="notes-title">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-no">05</div>
+        <div>
+          <h2 class="sec-title" id="notes-title">使用前請先看</h2>
+          <p class="sec-desc">以下幾點與安全、正確性有關，請務必留意。</p>
+        </div>
+      </div>
+      <div class="notes">
+        <div class="note reveal"><span class="mark" aria-hidden="true"></span><div><h3>自動存查只在「待結案」頁面使用</h3><p>使用前請先把待結案清單整理好，只留下同一檔號的公文。本工具不會替您判斷公文類別。</p></div></div>
+        <div class="note reveal"><span class="mark" aria-hidden="true"></span><div><h3>紙本文數量要自己確認</h3><p>遇到需要填寫紙本文數量的公文時，若自動作業停下來，請手動填寫後再繼續。</p></div></div>
+        <div class="note reveal"><span class="mark" aria-hidden="true"></span><div><h3>AI 的內容要自己檢查</h3><p>AI 產生的草稿與摘要僅供參考，不會自動送出或核章，請您確認內容後再送出。</p></div></div>
+        <div class="note reveal"><span class="mark" aria-hidden="true"></span><div><h3>共用電腦請勿開啟自動登入</h3><p>自動登入需要儲存卡片的 PinCode。在共用或公用電腦上，請不要使用此功能。</p></div></div>
+        <div class="note reveal"><span class="mark" aria-hidden="true"></span><div><h3>目前尚未支援「解除列管」</h3><p>相關功能尚未提供，待後續版本更新。</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 FAQ -->
+  <section class="block" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-no">06</div>
+        <div><h2 class="sec-title" id="faq-title">常見問題</h2></div>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary>按了按鈕沒有反應，怎麼辦？</summary>
+          <p>請先按 F5 重新整理公文頁面，再試一次。若仍無法使用，請確認目前所在的頁面是否正確。</p>
+        </details>
+        <details>
+          <summary>檔號和案次號要在哪裡改？</summary>
+          <p>點瀏覽器右上角的擴充功能圖示，開啟設定頁修改後按儲存即可，不需要改任何程式碼。</p>
+        </details>
+        <details>
+          <summary>不會用 AI，可以只用基本功能嗎？</summary>
+          <p>可以。複製、純文字與寫入說明內容都不需要 AI，也不需要任何設定。</p>
+        </details>
+        <details>
+          <summary>我發現問題，要怎麼回報？</summary>
+          <p>可以到 GitHub 的 Issue 留言。回報時請先移除公文文號、人名、電話等個人資料；如果是安全問題，請不要公開貼出細節。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 Install -->
+  <section class="block" id="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-no">07</div>
+        <div>
+          <h2 class="sec-title" id="install-title">下載與安裝</h2>
+          <p class="sec-desc">建議使用 Google Chrome 111 以上版本，或 Microsoft Edge。</p>
+        </div>
+      </div>
+      <div class="install">
+        <article class="card reveal">
+          <h3>從線上應用程式商店安裝</h3>
+          <p>最簡單的方式，之後會自動更新。</p>
+          <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/oiiaicbnnhogpfihckgkdnmbmclhalmg?utm_source=item-share-cb" target="_blank" rel="noopener">前往 Chrome 線上應用程式商店 <span class="arrow" aria-hidden="true">→</span></a>
+        </article>
+        <article class="card reveal d1">
+          <h3>手動安裝（進階）</h3>
+          <p>商店無法安裝時，可從 GitHub 下載後手動載入。</p>
+          <ol>
+            <li>從 GitHub 下載本專案並解壓縮。</li>
+            <li>在網址列輸入 <code>chrome://extensions</code>（Edge 請輸入 <code>edge://extensions</code>）。</li>
+            <li>開啟「開發人員模式」。</li>
+            <li>點「載入未封裝項目」，選擇解壓縮後的資料夾。</li>
+          </ol>
+        </article>
+      </div>
+      <div class="update reveal">
+        <time datetime="2026-10-28">近期更新</time>
+        <p>新增「寫入說明內容」功能，可把 Word 段落依序寫入公文的「說明」欄位；並加強安全防護與設定頁面的說明。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot">
+    <div>
+      <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>臺北市公文助手</a>
+      <p>本工具為非官方開發之瀏覽器擴充功能，與臺北市政府及公文系統主管機關無隸屬關係。使用前請依機關資訊安全規定評估。</p>
+    </div>
+    <div>
+      <p>開發者：<a href="https://github.com/blues32767" target="_blank" rel="noopener">blues32767</a></p>
+      <p>GitHub 專案與授權資訊請見 README。</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var header = document.querySelector('.site-header');
+  var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  var items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    items.forEach(function (el) { el.classList.add('is-in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
 </body>
 </html>

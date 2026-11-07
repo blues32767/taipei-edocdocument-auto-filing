@@ -149,7 +149,7 @@
 
     if (frameSrc) {
       try {
-        const res = await fetch(frameSrc);
+        const safeSrc = (() => { try { const u = new URL(frameSrc, location.href); return u.protocol === 'blob:' && u.origin === location.origin ? u.href : ''; } catch (_) { return ''; } })();if (!safeSrc) return null;const res = await fetch(safeSrc);
         if (res.ok) {
           const b = await res.blob();
           if (await isPdfBlob(b)) return { kind: 'pdf', source: 'iframe-fetch', blob: b };

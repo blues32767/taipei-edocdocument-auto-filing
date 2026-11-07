@@ -29,10 +29,7 @@
     "http://localhost/*",
     "https://generativelanguage.googleapis.com/*"
   ],
-  "optional_host_permissions": [
-    "https://*/*",
-    "http://*/*"
-  ],
+  "optional_host_permissions": [],
   "background": {
     "service_worker": "background.js"
   },
@@ -78,7 +75,7 @@
     },
     {
       "matches": [
-        "https://edoc.gov.taipei/*"
+        "https://edoc.gov.taipei/tcqb/oa/*"
       ],
       "js": [
         "autologin.js",
