@@ -133,6 +133,6 @@ A：可以到 GitHub 的 Issue 留言。回報時請先移除公文文號、人�
 ## 👤 作者與授權
 
 - 開發者：[blues32767](https://github.com/blues32767)
-- 授權：[PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/)（完整條文見 [LICENSE](LICENSE)）
+- 授權：[PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0)（完整條文見 [LICENSE](LICENSE)）
 - 白話說明：**可免費使用、修改與分享，但禁止商業用途。** 個人、學校教學研究、政府機關公務使用皆屬於非商業用途。
 - 版權：Copyright (c) 2026 blues32767
